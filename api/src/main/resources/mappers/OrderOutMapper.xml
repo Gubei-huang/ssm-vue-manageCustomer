@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.OrderOutDao">
+    <insert id="insertOrderOut">
+        insert into order_out values (#{num},#{customer_num},#{goods_num},
+                                     #{in_date},#{quantity})
+    </insert>
+    <update id="updateOrderOut">
+        update order_out set customer_num = #{customerNum},goods_num=#{goodsNum},
+                            in_date=#{inDate},quantity=#{quantity}
+        where num=#{num}
+    </update>
+    <delete id="deleteOrderOut">
+        delete from order_out
+        where num = #{num}
+    </delete>
+
+    <select id="listOrderOut" resultType="OrderOut">
+        select * from order_out
+    </select>
+    <select id="findOrderOutByNum" resultType="OrderOut">
+        select * from order_out
+        where num like '%${num}%'
+    </select>
+    <select id="selectOrderOutOne" resultType="OrderOut">
+        select * from order_out
+        where num = #{num}
+    </select>
+</mapper>

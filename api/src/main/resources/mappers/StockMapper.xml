@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.StockDao">
+    <insert id="insertStock">
+        insert into stock values (#{goodsNum},#{quantity})
+    </insert>
+    <update id="updateStock">
+        update stock set quantity = #{quantity}
+        where goods_num = #{goodsNum}
+    </update>
+    <delete id="deleteStock">
+        delete from stock
+        where goods_num = #{goodsNum}
+    </delete>
+
+    <select id="listStock" resultType="Stock">
+        select * from stock
+    </select>
+    <select id="findStock" resultType="Stock">
+        select * from stock
+        where goods_num like '%${goodsNum}%'
+    </select>
+</mapper>

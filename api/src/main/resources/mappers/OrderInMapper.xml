@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.OrderInDao">
+    <insert id="insertOrderIn">
+        insert into order_in values (#{num},#{supplier_num},#{goods_num},
+                #{in_date},#{quantity})
+    </insert>
+    <update id="updateOrderIn">
+        update order_in set supplier_num = #{supplierNum},goods_num=#{goodsNum},
+                in_date=#{inDate},quantity=#{quantity}
+        where num=#{num}
+    </update>
+    <delete id="deleteOrderIn">
+        delete from order_in
+        where num = #{num}
+    </delete>
+
+    <select id="listOrderIn" resultType="OrderIn">
+        select * from order_in
+    </select>
+    <select id="findOrderInByNum" resultType="OrderIn">
+        select * from order_in
+        where num like '%${num}%'
+    </select>
+    <select id="selectOrderInOne" resultType="OrderIn">
+        select * from order_in
+        where num = #{num}
+    </select>
+</mapper>

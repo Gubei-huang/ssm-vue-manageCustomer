@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.UserDao">
+    <resultMap id="userMap" type="user">
+        <id property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="disable" column="disable"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="userMap">
+        select * from user
+    </select>
+
+    <select id="findUser" resultMap="userMap">
+        select * from user
+        where username like '%${username}%'
+    </select>
+
+    <select id="login" resultMap="userMap">
+        select * from user
+        where username = #{username} and password = #{password}
+    </select>
+
+    <insert id="insertUser">
+        insert into user (username,password)
+        values (#{username},#{password})
+    </insert>
+
+    <update id="updateUser">
+        update user set password = #{password}
+        where username = #{username}
+    </update>
+
+    <update id="banUser">
+        update user set disable = #{disable}
+        where username = #{username}
+    </update>
+</mapper>

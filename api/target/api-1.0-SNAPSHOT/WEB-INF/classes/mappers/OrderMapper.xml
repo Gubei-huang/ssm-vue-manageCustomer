@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.OrderDao">
+    <resultMap id="orderMap" type="order">
+        <id property="num" column="num"/>
+        <result property="paymentUsername" column="payment_username"/>
+        <result property="paymentDate" column="payment_date"/>
+        <result property="expireDate" column="expire_date"/>
+        <result property="cost" column="cost"/>
+        <result property="type" column="type"/>
+        <result property="adminUsername" column="admin_username"/>
+    </resultMap>
+    <select id="selectAll" resultMap="orderMap">
+        select * from orders
+    </select>
+
+    <select id="findOrderByNum" resultMap="orderMap">
+        select * from orders
+        where num like '%${num}%'
+    </select>
+
+    <select id="findOrderByCustomer" resultMap="orderMap">
+        select * from orders
+        where payment_username like '%${paymentUsername}%'
+    </select>
+
+    <select id="findOrderByAdmin" resultMap="orderMap">
+        select * from orders
+        where admin_username like '%${adminUsername}%'
+    </select>
+    <select id="selectOne" resultMap="orderMap">
+        select * from orders
+        where num = #{num}
+    </select>
+
+    <delete id="delete">
+        delete from orders
+        where num = #{num}
+    </delete>
+
+    <update id="update">
+        update orders set payment_username=#{paymentUsername}, payment_date =#{paymentDate} ,expire_date=#{expireDate},
+            cost=#{cost} ,type=#{type}
+        where num = #{num}
+    </update>
+    <update id="renew">
+        update orders set expire_date=#{expireDate},cost=#{cost},admin_username=#{adminUsername}
+        where num = #{num}
+    </update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hwj.dao.CustomerDao">
+    <resultMap id="customerMap" type="customer">
+        <id property="username" column="username"/>
+        <result property="phone" column="phone"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="customerMap">
+        select * from customer
+    </select>
+
+    <select id="findCustomer" resultMap="customerMap">
+        select * from customer
+        where username like '%${username}%' and type like '%${type}%'
+    </select>
+
+    <delete id="delete">
+        delete from customer where username = #{username}
+    </delete>
+
+    <insert id="insert">
+        insert into customer (username,phone,type )
+        values (#{username},#{phone},#{type});
+    </insert>
+
+    <update id="update">
+        update customer set phone = #{phone},type = #{type}
+        where username = #{username}
+    </update>
+
+</mapper>
